@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#090909">
+<title>ALIA FIT — Treinador em Casa</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg: #080808;
+    --card: #111111;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #8f8f8f;
+    --accent: #c7ff2f;
+    --accent2: #9fe000;
+    --danger: #ff4d4d;
+    --border: rgba(255,255,255,.07);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+/* HEADER */
+header {
+    padding: 25px 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.status {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* HERO */
+.hero {
+    margin: 10px 16px 20px;
+    padding: 25px;
+    border-radius: 25px;
+    background:
+        linear-gradient(135deg, rgba(199,255,47,.18), transparent 50%),
+        linear-gradient(135deg, #171717, #0e0e0e);
+    border: 1px solid rgba(199,255,47,.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "FIT";
+    position: absolute;
+    right: -15px;
+    bottom: -35px;
+    font-size: 100px;
+    font-weight: 900;
+    color: rgba(255,255,255,.025);
+}
+
+.hero small {
+    color: var(--accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.hero h1 {
+    font-size: 31px;
+    line-height: 1.05;
+    margin: 10px 0;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 300px;
+}
+
+.hero button {
+    margin-top: 20px;
+}
+
+/* BUTTON */
+button {
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.primary {
+    background: var(--accent);
+    color: #080808;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.secondary {
+    background: var(--card2);
+    color: white;
+    padding: 13px 18px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    font-weight: bold;
+}
+
+/* SECTION */
+section {
+    padding: 0 16px;
+    margin-top: 25px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.section-title h2 {
+    font-size: 18px;
+}
+
+.section-title span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+}
+
+.stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 16px 10px;
+    border-radius: 17px;
+}
+
+.stat-icon {
+    font-size: 19px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 20px;
+    margin-top: 7px;
+}
+
+.stat small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* WORKOUT CARDS */
+.workouts {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.workout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 17px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.workout-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: #1d1d1d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.workout-info {
+    flex: 1;
+}
+
+.workout-info h3 {
+    font-size: 15px;
+}
+
+.workout-info p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.play {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    background: var(--accent);
+    color: #000;
+    font-size: 16px;
+}
+
+/* PROGRESS */
+.progress-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-top strong {
+    font-size: 26px;
+}
+
+.progress-top span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.progress-bar {
+    height: 9px;
+    background: #242424;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 17px 0 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 35%;
+    background: var(--accent);
+    border-radius: 20px;
+    transition: width .5s;
+}
+
+.goal-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* WATER */
+.water {
+    background: linear-gradient(135deg, #101a1c, #101010);
+    border: 1px solid rgba(91,220,255,.1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.water-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.water h3 {
+    font-size: 17px;
+}
+
+.water-count {
+    color: #62dfff;
+    font-size: 13px;
+}
+
+.water-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.water-btn {
+    flex: 1;
+    padding: 11px;
+    border-radius: 12px;
+    background: #181818;
+    color: white;
+    border: 1px solid var(--border);
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 520px;
+    height: 72px;
+    background: rgba(12,12,12,.96);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    z-index: 100;
+}
+
+.nav-btn {
+    background: transparent;
+    color: #666;
+    font-size: 19px;
+}
+
+.nav-btn small {
+    display: block;
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+.nav-btn.active {
+    color: var(--accent);
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.82);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 520px;
+    background: #111;
+    border-radius: 28px 28px 0 0;
+    padding: 25px 20px 35px;
+    border-top: 1px solid #292929;
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #222;
+    color: white;
+    font-size: 18px;
+}
+
+.timer {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.timer-label {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.timer-number {
+    font-size: 72px;
+    font-weight: 900;
+    margin: 8px 0;
+    letter-spacing: -4px;
+}
+
+.exercise-name {
+    color: var(--accent);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.timer-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.timer-actions button {
+    flex: 1;
+    padding: 16px;
+}
+
+/* SETTINGS */
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.setting span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+input {
+    width: 90px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #191919;
+    color: white;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (min-width: 600px) {
+    body {
+        background: #050505;
+    }
+
+    .app {
+        border-left: 1px solid #111;
+        border-right: 1px solid #111;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="logo">ALIA <span>FIT</span></div>
+    <div class="status">🔥</div>
+</header>
+
+<div class="hero">
+    <small>Treinador em casa</small>
+    <h1>Seu corpo.<br>Seu ritmo.</h1>
+    <p>Treinos rápidos para ajudar você a criar uma rotina ativa sem precisar de academia.</p>
+    <button class="primary" onclick="startWorkout()">COMEÇAR TREINO →</button>
+</div>
+
+<section>
+    <div class="section-title">
+        <h2>Seu progresso</h2>
+        <span>HOJE</span>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-icon">🔥</div>
+            <strong id="calories">0</strong>
+            <small>KCAL</small>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">⏱️</div>
+            <strong id="minutes">0</strong>
+            <small>MINUTOS</small>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🏆</div>
+            <strong id="sessions">0</strong>
+            <small>TREINOS</small>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>Treinos de hoje</h2>
+        <span>EM CASA</span>
+    </div>
+
+    <div class="workouts">
+
+        <div class="workout">
+            <div class="workout-icon">🔥</div>
+            <div class="workout-info">
+                <h3>Queima Rápida</h3>
+                <p>15 min • Corpo inteiro • ~120 kcal</p>
+            </div>
+            <button class="play" onclick="openWorkout('Queima Rápida', 15, 120)">▶</button>
+        </div>
+
+        <div class="workout">
+            <div class="workout-icon">💪</div>
+            <div class="workout-info">
+                <h3>Força em Casa</h3>
+                <p>20 min • Força • ~160 kcal</p>
+            </div>
+            <button class="play" onclick="openWorkout('Força em Casa', 20, 160)">▶</button>
+        </div>
+
+        <div class="workout">
+            <div class="workout-icon">⚡</div>
+            <div class="workout-info">
+                <h3>HIIT Express</h3>
+                <p>10 min • Alta intensidade • ~100 kcal</p>
+            </div>
+            <button class="play" onclick="openWorkout('HIIT Express', 10, 100)">▶</button>
+        </div>
+
+        <div class="workout">
+            <div class="workout-icon">🧘</div>
+            <div class="workout-info">
+                <h3>Mobilidade</h3>
+                <p>12 min • Alongamento • Baixo impacto</p>
+            </div>
+            <button class="play" onclick="openWorkout('Mobilidade', 12, 60)">▶</button>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>Meta de peso</h2>
+        <span id="weightText">70 kg → 65 kg</span>
+    </div>
+
+    <div class="progress-card">
+
+        <div class="progress-top">
+            <strong id="currentWeight">70 kg</strong>
+            <span>Meta: <b id="goalWeight">65 kg</b></span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="weightProgress"></div>
+        </div>
